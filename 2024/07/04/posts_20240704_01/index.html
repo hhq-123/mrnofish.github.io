@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="机器人工程系列文章目录这里罗列了系列文章链接   @TOC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mr.NoFish">
+<meta property="og:url" content="http://example.com/2024/07/04/posts_20240704_01/index.html">
+<meta property="og:site_name" content="Mr.NoFish">
+<meta property="og:description" content="机器人工程系列文章目录这里罗列了系列文章链接   @TOC">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/07/04/posts_20240704_01/intro.png">
+<meta property="og:image" content="http://example.com/2024/07/04/posts_20240704_01/stm32f4.png">
+<meta property="og:image" content="http://example.com/2024/07/04/posts_20240704_01/stlink.png">
+<meta property="og:image" content="http://example.com/2024/07/04/posts_20240704_01/ch340.png">
+<meta property="og:image" content="http://example.com/2024/07/04/posts_20240704_01/cubemx_01.png">
+<meta property="og:image" content="http://example.com/2024/07/04/posts_20240704_01/cubemx_02.png">
+<meta property="og:image" content="http://example.com/2024/07/04/posts_20240704_01/cubemx_03.png">
+<meta property="og:image" content="http://example.com/2024/07/04/posts_20240704_01/cubemx_04.png">
+<meta property="og:image" content="http://example.com/2024/07/04/posts_20240704_01/cubemx_05.png">
+<meta property="og:image" content="http://example.com/2024/07/04/posts_20240704_01/cubemx_06.png">
+<meta property="og:image" content="http://example.com/2024/07/04/posts_20240704_01/cubemx_07.png">
+<meta property="og:image" content="http://example.com/2024/07/04/posts_20240704_01/cubemx_08.png">
+<meta property="og:image" content="http://example.com/2024/07/04/posts_20240704_01/keil_01.png">
+<meta property="og:image" content="http://example.com/2024/07/04/posts_20240704_01/keil_02.png">
+<meta property="article:published_time" content="2024-07-04T07:55:42.938Z">
+<meta property="article:modified_time" content="2024-07-04T08:15:51.785Z">
+<meta property="article:author" content="Haoqi Han">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/07/04/posts_20240704_01/intro.png">
+
+<link rel="canonical" href="http://example.com/2024/07/04/posts_20240704_01/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title> | Mr.NoFish</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Mr.NoFish</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/04/posts_20240704_01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Haoqi Han">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.NoFish">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2024-07-04 15:55:42 / Modified: 16:15:51" itemprop="dateCreated datePublished" datetime="2024-07-04T15:55:42+08:00">2024-07-04</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="机器人工程系列文章目录"><a href="#机器人工程系列文章目录" class="headerlink" title="机器人工程系列文章目录"></a>机器人工程系列文章目录</h1><p><font color="#999AAA">这里罗列了系列文章链接</font></p>
+<hr style=" border:solid; width:100px; height:1px;" color="#000000" size="1"">
+
+<h2 id="概念总述"><a href="#概念总述" class="headerlink" title="概念总述"></a>概念总述</h2><h2 id="STM入门教学"><a href="#STM入门教学" class="headerlink" title="STM入门教学"></a>STM入门教学</h2><p><img src="/2024/07/04/posts_20240704_01/intro.png" alt="intro"></p>
+<hr style=" border:solid; width:100px; height:1px;" color="#000000" size="1"">
+
+<p>@<a href="%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95">TOC</a></p>
+
+
+<hr style=" border:solid; width:100px; height:1px;" color="#000000" size="1"">
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>写点入门，嗯，感觉一对一教学效率很低，所以打算写篇STM32的入门教学，最好是傻瓜式教学我想。<br>咳咳，最近出差，手边没实物，实物演示等我回实验室慢慢更</p>
+<h2 id="关于嵌入式"><a href="#关于嵌入式" class="headerlink" title="关于嵌入式"></a>关于嵌入式</h2><p>展开一份工作前，最好对一份工作有着充分的价值认识，从科研人员角度出发，STM32最大程度上解决了复杂系统的控制硬件实现问题，丰富的控制接口可以应对机器人的大部分底层通讯与控制任务。</p>
+<p>关于控制系统，可以参考下这篇文章。</p>
+<p>而对于这样一个舵机系统，STM32则可以帮助您完成基本的数据通讯、位置传感与电机控制。</p>
+<p>留意在机器人中，stm32的重点功能体现在</p>
+<ol>
+<li>信号的采集（ADC电压测量）</li>
+<li>信号的输出（PWM脉宽输出）</li>
+<li>数据的交互（USART串口通讯）</li>
+<li>定时任务的循环（TIMER定时器循环）</li>
+</ol>
+<p>以上的方法通常不唯一，正所谓草木金石皆可为剑，但入门的话可以采取最简单的办法理解（括号里的实验）。</p>
+<h2 id="知识准备"><a href="#知识准备" class="headerlink" title="知识准备"></a>知识准备</h2><p>食用本篇教程之前建议先有以下基础</p>
+<ol>
+<li>使用过Arduino，并了解Arduino基本功能（DigitalWrite, DigitalRead, AnalogWrite, AnalogRead, Serial, Timer等等）。</li>
+<li>C&#x2F;C++编程学习，多文件编译等等。</li>
+<li>最好阅读过《微机原理》、《计算机原理》、《模拟电路》、《数字电路》等，如果觉得上述太难我推荐阅读《编码》（简单又囊括全部），当然你可以边学stm32边补充上述知识。</li>
+</ol>
+<h2 id="硬件准备"><a href="#硬件准备" class="headerlink" title="硬件准备"></a>硬件准备</h2><p>首先会需要手边有这几个东西，配置我按穷鬼设备算了（那些大型号的没什么用，买来只会吃灰），约摸50块就可以满足大部分的学习需求。</p>
+<table>
+<thead>
+<tr>
+<th>设备</th>
+<th>价格</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>STM32F411CEU6核心板</td>
+<td>20元</td>
+<td>主控板呢</td>
+</tr>
+<tr>
+<td>ST-Link V2</td>
+<td>20元</td>
+<td>刷程序与调试</td>
+</tr>
+<tr>
+<td>CH340模块</td>
+<td>5元</td>
+<td>实现串口通讯</td>
+</tr>
+</tbody></table>
+<p>STM32F411CEU6核心板，体积小巧，便宜且功能强，可以胜任大部分初期学习的工作，你可以将它安装在面包板上，并快速完成飞线连接，搭建属于你自己的第一份嵌入式系统（注意很多F4有typeC接口，但不能接到提供高电压的TypeC设备中，会炸的）。<br><img src="/2024/07/04/posts_20240704_01/stm32f4.png" alt="stm32f4"></p>
+<p>ST-Link，ST公司官方提供的嵌入式开发调试器，调试程序完全足够使用。<br><img src="/2024/07/04/posts_20240704_01/stlink.png" alt="stlink"></p>
+<p>CH340模块，一种简易的USART转USB通讯的设备，你可以通过两根杜邦线连接到单片机上，并在电脑上使用XCOM软件观察到你的单片机和你说的悄悄话。<br><img src="/2024/07/04/posts_20240704_01/ch340.png" alt="ch340"></p>
+<p>以上三件是必需品，嗯，以及面包板与若干杜邦线。<br>如果是富哥的话，可以考虑入一些万用表，便携示波器之类的，测试电路bug会更好些。<br>大学牲可以就近找找实验室，大部分的课题组应该很欢迎本科生入组学习。<br>还有一些电位计啊，舵机啊，电机啊，oled之类的电子元件，看个人喜好与工程需求，可以酌情购买并准备调试。</p>
+<h2 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h2><p>编写stm32程序需要安装如下软件</p>
+<table>
+<thead>
+<tr>
+<th>设备</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://www.keil.com/demo/eval/arm.html">Keil5 MDK-Arm</a></td>
+<td>编译程序</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.st.com.cn/zh/development-tools/stm32cubemx.html">ST-CubeMX</a></td>
+<td>配置stm32底层</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="http://www.openedv.com/forum.php?mod=viewthread&tid=279749&highlight=%EF%BF%BD%EF%BF%BD%EF%BF%BD%DA%B5%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD">XCOM</a></td>
+<td>观看串口数据</td>
+</tr>
+</tbody></table>
+<p>其中keil5是需要<a target="_blank" rel="noopener" href="https://blog.csdn.net/wy1948/article/details/113530260">正版购买</a>才能用的，这里也鼓励大家多支持正版</p>
+<p>当然你的电脑大概率还需要补充这两个驱动<br><a target="_blank" rel="noopener" href="https://www.wch.cn/downloads/CH341SER_EXE.html">CH340设备驱动</a><br><a target="_blank" rel="noopener" href="https://www.st.com/en/development-tools/stsw-link009.html">STSW-LINK009</a></p>
+<h1 id="STM32-启动！"><a href="#STM32-启动！" class="headerlink" title="STM32 启动！"></a>STM32 启动！</h1><p>现在是一周后，你现在面前有着安装完各个软件的电脑，stm32开发板，和茫然不知所措的你。<br>我们先来把stm32和各个设备的连线做好。</p>
+<h2 id="硬件接线"><a href="#硬件接线" class="headerlink" title="硬件接线"></a>硬件接线</h2><p>使用ST-link进行系统调试，F4核心板屁股上有GND、CLK、DIO和3V3三根线，分别接入STLink的GND、SWCLK、SWDIO和3V3的接口中，其他的线不用管。</p>
+<table>
+<thead>
+<tr>
+<th>STM32F4</th>
+<th>STLINK</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3V3</td>
+<td>3V3</td>
+<td>供能</td>
+</tr>
+<tr>
+<td>DIO</td>
+<td>SWDIO</td>
+<td>写入数据线</td>
+</tr>
+<tr>
+<td>CLK</td>
+<td>SWCLK</td>
+<td>写入时钟线</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>GND</td>
+<td>共地</td>
+</tr>
+</tbody></table>
+<p>接入电脑后，你的设备管理器中将会多出</p>
+<p>使用CH340进行串口通讯，将RX接入PA9，TX接入PA10，记得接一下地线。</p>
+<table>
+<thead>
+<tr>
+<th>STM32F4</th>
+<th>CH340</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3V3</td>
+<td>3V3</td>
+<td>建议别接</td>
+</tr>
+<tr>
+<td>PA9</td>
+<td>RX</td>
+<td>通讯线</td>
+</tr>
+<tr>
+<td>PA10</td>
+<td>TX</td>
+<td>通讯线</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>GND</td>
+<td>共地</td>
+</tr>
+</tbody></table>
+<p>接入电脑后，你的设备管理器中将会多出<br>整体的连接的效果大概是这样</p>
+<h2 id="cubemx-启动！"><a href="#cubemx-启动！" class="headerlink" title="cubemx 启动！"></a>cubemx 启动！</h2><p>我们先选择芯片，这里大概需要登录并下载很长时间。<br><img src="/2024/07/04/posts_20240704_01/cubemx_01.png" alt="cubemx_01"></p>
+<p>输入我们的核心板芯片型号STM32F411CEU6，并双击选中该芯片创建工程。<br><img src="/2024/07/04/posts_20240704_01/cubemx_02.png" alt="cubemx_02"></p>
+<p>在左侧categories中选择RCC，并为HSE与LSE选择Crystal&#x2F;Ceramic Resonator，你会发现右侧的芯片引脚上自动变绿了四个引脚（这个功能是开启了芯片的外部时钟输入功能，提供更加精准的时钟源。）<br><img src="/2024/07/04/posts_20240704_01/cubemx_03.png" alt="cubemx_03"></p>
+<p>切换到SYS中，将Debug设置为Serial Wire。这个功能将芯片的PA13与PA14引脚设置为SWD调试接口，并将与STLink进行连接<br><img src="/2024/07/04/posts_20240704_01/cubemx_04.png" alt="cubemx_04"></p>
+<p>切换到Clock Configuration界面，注意下边的HCLK将是我们芯片的运行主时钟速度，数值越高芯片运行速度越快，默认应该是16，这里我们将其设置为最大值100，并回车，软件将自动寻找时钟分配方案<br><img src="/2024/07/04/posts_20240704_01/cubemx_05.png" alt="cubemx_05"></p>
+<p>选择Project Manager，设置好项目名称，项目地址（注意不要在中文目录或者奇怪字符的目录下，否则生成不成功），并设置好工具链MDK-ARM<br><img src="/2024/07/04/posts_20240704_01/cubemx_06.png" alt="cubemx_06"></p>
+<p>转到Code Generator中，勾选Copy only the necessary library files和Generate peripheral initialization as a pair of ‘.c&#x2F;.h’ files per peripheral<br><img src="/2024/07/04/posts_20240704_01/cubemx_07.png" alt="cubemx_07"></p>
+<p>至此cubeMX设置成功，点击GENERATE CODE，我们将转战Keil5。<br><img src="/2024/07/04/posts_20240704_01/cubemx_08.png" alt="cubemx_08"></p>
+<h2 id="keil5-启动！"><a href="#keil5-启动！" class="headerlink" title="keil5 启动！"></a>keil5 启动！</h2><p>如果是刚刚下载的keil5，大概库下载器会给你下载很久的库文件，可以挂个梯子，下的更快一些<br>keil5的界面比较复古，我们一点点来，首先点击编译设置按钮<br><img src="/2024/07/04/posts_20240704_01/keil_01.png" alt="keil_01"></p>
+<p>我们为程序选择编译器V6，速度更快<br><img src="/2024/07/04/posts_20240704_01/keil_02.png" alt="keil_02"></p>
+<p>点击部分编译或全部编译，最终现实0 Error的时候表示编译成功</p>
+<p>这个时候点击下载按钮，你的STLink大概率会兴奋地闪烁起来，虽然你并不知道具体发生了什么事情，但切切实实迈入了嵌入式大门的第一步。</p>
+<p>下一章我将简单介绍串口与定时器的功能</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/06/30/posts_20240630_01/" rel="prev" title="工程文件参考——CubeMX+LL库+USART+DMA+不定长数据接收发送库">
+      <i class="fa fa-chevron-left"></i> 工程文件参考——CubeMX+LL库+USART+DMA+不定长数据接收发送库
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%B7%A5%E7%A8%8B%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">机器人工程系列文章目录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5%E6%80%BB%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">概念总述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STM%E5%85%A5%E9%97%A8%E6%95%99%E5%AD%A6"><span class="nav-number">1.2.</span> <span class="nav-text">STM入门教学</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%B5%8C%E5%85%A5%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">关于嵌入式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E5%87%86%E5%A4%87"><span class="nav-number">2.2.</span> <span class="nav-text">知识准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6%E5%87%86%E5%A4%87"><span class="nav-number">2.3.</span> <span class="nav-text">硬件准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%87%86%E5%A4%87"><span class="nav-number">2.4.</span> <span class="nav-text">软件准备</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#STM32-%E5%90%AF%E5%8A%A8%EF%BC%81"><span class="nav-number">3.</span> <span class="nav-text">STM32 启动！</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6%E6%8E%A5%E7%BA%BF"><span class="nav-number">3.1.</span> <span class="nav-text">硬件接线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cubemx-%E5%90%AF%E5%8A%A8%EF%BC%81"><span class="nav-number">3.2.</span> <span class="nav-text">cubemx 启动！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#keil5-%E5%90%AF%E5%8A%A8%EF%BC%81"><span class="nav-number">3.3.</span> <span class="nav-text">keil5 启动！</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Haoqi Han</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Haoqi Han</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
