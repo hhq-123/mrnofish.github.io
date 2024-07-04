@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="机器人工程系列文章目录这里罗列了系列文章链接 概念总述STM入门教学前言写点入门，嗯，感觉一对一教学效率很低，所以打算写篇STM32的入门教学，最好是傻瓜式教学我想。咳咳，最近出差，手边没实物，实物演示等我回实验室慢慢更 关于嵌入式展开一份工作前，最好对一份工作有着充分的价值认识，从科研人员角度出发，STM32最大程度上解决了复杂系统的控制硬件实现问题，丰富的控制接口可以应对机器人的大部分底层通">
+  <meta name="description" content="前言写点入门，嗯，感觉一对一教学效率很低，所以打算写篇STM32的入门教学，最好是傻瓜式教学我想。咳咳，最近出差，手边没实物，实物演示等我回实验室慢慢更 关于嵌入式展开一份工作前，最好对一份工作有着充分的价值认识，从科研人员角度出发，STM32最大程度上解决了复杂系统的控制硬件实现问题，丰富的控制接口可以应对机器人的大部分底层通讯与控制任务。 关于控制系统，可以参考下这篇文章。 而对于这样一个舵">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【STM32入门教学】——材料准备与工程搭建">
 <meta property="og:url" content="http://example.com/2024/07/04/posts_20240704_01/index.html">
 <meta property="og:site_name" content="Mr.NoFish">
-<meta property="og:description" content="机器人工程系列文章目录这里罗列了系列文章链接 概念总述STM入门教学前言写点入门，嗯，感觉一对一教学效率很低，所以打算写篇STM32的入门教学，最好是傻瓜式教学我想。咳咳，最近出差，手边没实物，实物演示等我回实验室慢慢更 关于嵌入式展开一份工作前，最好对一份工作有着充分的价值认识，从科研人员角度出发，STM32最大程度上解决了复杂系统的控制硬件实现问题，丰富的控制接口可以应对机器人的大部分底层通">
+<meta property="og:description" content="前言写点入门，嗯，感觉一对一教学效率很低，所以打算写篇STM32的入门教学，最好是傻瓜式教学我想。咳咳，最近出差，手边没实物，实物演示等我回实验室慢慢更 关于嵌入式展开一份工作前，最好对一份工作有着充分的价值认识，从科研人员角度出发，STM32最大程度上解决了复杂系统的控制硬件实现问题，丰富的控制接口可以应对机器人的大部分底层通讯与控制任务。 关于控制系统，可以参考下这篇文章。 而对于这样一个舵">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2024/07/04/posts_20240704_01/intro.png">
 <meta property="og:image" content="http://example.com/2024/07/04/posts_20240704_01/stm32f4.png">
@@ -42,7 +42,7 @@
 <meta property="og:image" content="http://example.com/2024/07/04/posts_20240704_01/keil_01.png">
 <meta property="og:image" content="http://example.com/2024/07/04/posts_20240704_01/keil_02.png">
 <meta property="article:published_time" content="2024-07-04T08:18:51.000Z">
-<meta property="article:modified_time" content="2024-07-04T08:21:29.620Z">
+<meta property="article:modified_time" content="2024-07-04T09:15:21.792Z">
 <meta property="article:author" content="Haoqi Han">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2024/07/04/posts_20240704_01/intro.png">
@@ -204,7 +204,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2024-07-04 16:18:51 / Modified: 16:21:29" itemprop="dateCreated datePublished" datetime="2024-07-04T16:18:51+08:00">2024-07-04</time>
+              <time title="Created: 2024-07-04 16:18:51 / Modified: 17:15:21" itemprop="dateCreated datePublished" datetime="2024-07-04T16:18:51+08:00">2024-07-04</time>
             </span>
 
           
@@ -219,8 +219,7 @@
 
       
         <p><img src="/2024/07/04/posts_20240704_01/intro.png" alt="intro"></p>
-<h1 id="机器人工程系列文章目录"><a href="#机器人工程系列文章目录" class="headerlink" title="机器人工程系列文章目录"></a>机器人工程系列文章目录</h1><p>这里罗列了系列文章链接</p>
-<h2 id="概念总述"><a href="#概念总述" class="headerlink" title="概念总述"></a>概念总述</h2><h2 id="STM入门教学"><a href="#STM入门教学" class="headerlink" title="STM入门教学"></a>STM入门教学</h2><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>写点入门，嗯，感觉一对一教学效率很低，所以打算写篇STM32的入门教学，最好是傻瓜式教学我想。<br>咳咳，最近出差，手边没实物，实物演示等我回实验室慢慢更</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>写点入门，嗯，感觉一对一教学效率很低，所以打算写篇STM32的入门教学，最好是傻瓜式教学我想。<br>咳咳，最近出差，手边没实物，实物演示等我回实验室慢慢更</p>
 <h2 id="关于嵌入式"><a href="#关于嵌入式" class="headerlink" title="关于嵌入式"></a>关于嵌入式</h2><p>展开一份工作前，最好对一份工作有着充分的价值认识，从科研人员角度出发，STM32最大程度上解决了复杂系统的控制硬件实现问题，丰富的控制接口可以应对机器人的大部分底层通讯与控制任务。</p>
 <p>关于控制系统，可以参考下这篇文章。</p>
 <p>而对于这样一个舵机系统，STM32则可以帮助您完成基本的数据通讯、位置传感与电机控制。</p>
@@ -381,8 +380,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/06/30/posts_20240630_01/" rel="prev" title="工程文件参考——CubeMX+LL库+USART+DMA+不定长数据接收发送库">
-      <i class="fa fa-chevron-left"></i> 工程文件参考——CubeMX+LL库+USART+DMA+不定长数据接收发送库
+    <a href="/2024/07/04/posts_20240704_02/" rel="prev" title="工程文件参考——CubeMX+LL库+SPI主机 阻塞式通用库">
+      <i class="fa fa-chevron-left"></i> 工程文件参考——CubeMX+LL库+SPI主机 阻塞式通用库
     </a></div>
       <div class="post-nav-item"></div>
     </div>
@@ -443,7 +442,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%B7%A5%E7%A8%8B%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">机器人工程系列文章目录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5%E6%80%BB%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">概念总述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STM%E5%85%A5%E9%97%A8%E6%95%99%E5%AD%A6"><span class="nav-number">1.2.</span> <span class="nav-text">STM入门教学</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%B5%8C%E5%85%A5%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">关于嵌入式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E5%87%86%E5%A4%87"><span class="nav-number">2.2.</span> <span class="nav-text">知识准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6%E5%87%86%E5%A4%87"><span class="nav-number">2.3.</span> <span class="nav-text">硬件准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%87%86%E5%A4%87"><span class="nav-number">2.4.</span> <span class="nav-text">软件准备</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#STM32-%E5%90%AF%E5%8A%A8%EF%BC%81"><span class="nav-number">3.</span> <span class="nav-text">STM32 启动！</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6%E6%8E%A5%E7%BA%BF"><span class="nav-number">3.1.</span> <span class="nav-text">硬件接线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cubemx-%E5%90%AF%E5%8A%A8%EF%BC%81"><span class="nav-number">3.2.</span> <span class="nav-text">cubemx 启动！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#keil5-%E5%90%AF%E5%8A%A8%EF%BC%81"><span class="nav-number">3.3.</span> <span class="nav-text">keil5 启动！</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%B5%8C%E5%85%A5%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">关于嵌入式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E5%87%86%E5%A4%87"><span class="nav-number">1.2.</span> <span class="nav-text">知识准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6%E5%87%86%E5%A4%87"><span class="nav-number">1.3.</span> <span class="nav-text">硬件准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%87%86%E5%A4%87"><span class="nav-number">1.4.</span> <span class="nav-text">软件准备</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#STM32-%E5%90%AF%E5%8A%A8%EF%BC%81"><span class="nav-number">2.</span> <span class="nav-text">STM32 启动！</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6%E6%8E%A5%E7%BA%BF"><span class="nav-number">2.1.</span> <span class="nav-text">硬件接线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cubemx-%E5%90%AF%E5%8A%A8%EF%BC%81"><span class="nav-number">2.2.</span> <span class="nav-text">cubemx 启动！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#keil5-%E5%90%AF%E5%8A%A8%EF%BC%81"><span class="nav-number">2.3.</span> <span class="nav-text">keil5 启动！</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -457,7 +456,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
