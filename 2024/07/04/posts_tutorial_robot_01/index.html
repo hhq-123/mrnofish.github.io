@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="前言本文尝试用高中生能理解的话讲述下机器人控制问题的一些最基本思路 “吾等众生，生于尘土，内究己身，外拓乾坤，终得世间真理。”  关于基本控制单元你现在手上有一枚电机，两端接上正负极，电机将会旋转，反向连接，则会反转。调低输入的电压，会发现电机转速越来越慢直到停止 但电机的转矩通常很小，我们利用杠杆原理，制造一个齿轮组接进去。通过齿轮的传动，输出端的力量更大了，尽管代价是输出转速降低导致的 现在你">
+  <meta name="description" content="前言本文尝试用高中生能理解的话讲述下机器人控制问题的一些最基本思路  关于基本控制单元你现在手上有一枚电机，两端接上正负极，电机将会旋转，反向连接，则会反转。调低输入的电压，会发现电机转速越来越慢直到停止 但电机的转矩通常很小，我们利用杠杆原理，制造一个齿轮组接进去。通过齿轮的传动，输出端的力量更大了，尽管代价是输出转速降低导致的 现在你又有了一个电位计，这很像你初中学过的滑动变阻器，只是不同的是">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【机器人导论】——如何控制机器人？">
 <meta property="og:url" content="http://example.com/2024/07/04/posts_tutorial_robot_01/index.html">
 <meta property="og:site_name" content="Mr.NoFish">
-<meta property="og:description" content="前言本文尝试用高中生能理解的话讲述下机器人控制问题的一些最基本思路 “吾等众生，生于尘土，内究己身，外拓乾坤，终得世间真理。”  关于基本控制单元你现在手上有一枚电机，两端接上正负极，电机将会旋转，反向连接，则会反转。调低输入的电压，会发现电机转速越来越慢直到停止 但电机的转矩通常很小，我们利用杠杆原理，制造一个齿轮组接进去。通过齿轮的传动，输出端的力量更大了，尽管代价是输出转速降低导致的 现在你">
+<meta property="og:description" content="前言本文尝试用高中生能理解的话讲述下机器人控制问题的一些最基本思路  关于基本控制单元你现在手上有一枚电机，两端接上正负极，电机将会旋转，反向连接，则会反转。调低输入的电压，会发现电机转速越来越慢直到停止 但电机的转矩通常很小，我们利用杠杆原理，制造一个齿轮组接进去。通过齿轮的传动，输出端的力量更大了，尽管代价是输出转速降低导致的 现在你又有了一个电位计，这很像你初中学过的滑动变阻器，只是不同的是">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-07-04T11:25:51.000Z">
-<meta property="article:modified_time" content="2024-07-04T12:15:14.933Z">
+<meta property="article:modified_time" content="2024-07-04T16:05:19.567Z">
 <meta property="article:author" content="Haoqi Han">
 <meta name="twitter:card" content="summary">
 
@@ -187,10 +187,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2024-07-04 19:25:51 / Modified: 20:15:14" itemprop="dateCreated datePublished" datetime="2024-07-04T19:25:51+08:00">2024-07-04</time>
+              <time title="Created: 2024-07-04 19:25:51" itemprop="dateCreated datePublished" datetime="2024-07-04T19:25:51+08:00">2024-07-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-07-05 00:05:19" itemprop="dateModified" datetime="2024-07-05T00:05:19+08:00">2024-07-05</time>
+              </span>
 
           
 
@@ -204,7 +210,6 @@
 
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文尝试用高中生能理解的话讲述下机器人控制问题的一些最基本思路</p>
-<p>“吾等众生，生于尘土，内究己身，外拓乾坤，终得世间真理。”</p>
 <hr>
 <h1 id="关于基本控制单元"><a href="#关于基本控制单元" class="headerlink" title="关于基本控制单元"></a>关于基本控制单元</h1><p>你现在手上有一枚电机，两端接上正负极，电机将会旋转，反向连接，则会反转。调低输入的电压，会发现电机转速越来越慢直到停止</p>
 <p>但电机的转矩通常很小，我们利用杠杆原理，制造一个齿轮组接进去。通过齿轮的传动，输出端的力量更大了，尽管代价是输出转速降低导致的</p>
@@ -234,6 +239,7 @@
 <p>基本单元的再组合构成了各种各样的机器人，通常我们描述机器人质心在空间运动为一个[位置、速度、加速度]信息。机器人肢体（包括连杆、旋翼、甚至是火箭推进器）会建立出对中央假想质心的力与力矩作用，计算肢体对中央质心的动力学，建立系统在环境中的运动信息（单刚体动力学），可以实现机器人最基本的运动控制。</p>
 <p>连杆系统（理论力学、多刚体动力学），包括我们人类在内，是一种最精简的连杆运动机器人，讨论多段连杆的动力学问题（机器人学），可以评估出机器人肢体对自身或对其他物体的力作用问题。</p>
 <p>额外的，例如人类，肢体由更复杂的肌腱系统进行驱动，比较理想的是利用并联机构进行替代（并联机器人、闭链运动学），这涉及到闭链运动学的建立，会涉及到更加复杂的控制问题。</p>
+<p>“吾等众生，生于尘土，内究己身，外拓乾坤，终得世间真理。”</p>
 
     </div>
 
