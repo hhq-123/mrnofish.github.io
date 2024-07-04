@@ -462,7 +462,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2024-07-04 00:00:00 / Modified: 17:04:11" itemprop="dateCreated datePublished" datetime="2024-07-04T00:00:00+08:00">2024-07-04</time>
+              <time title="Created: 2024-07-04 00:00:00 / Modified: 17:27:55" itemprop="dateCreated datePublished" datetime="2024-07-04T00:00:00+08:00">2024-07-04</time>
             </span>
 
           
@@ -476,7 +476,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>SPI，想了很久没想明白其DMA或者IT比较好用的方法，可能之后也会写一个<br>我个人使用场景大数据流不多，如果是大批量数据交互自然是DMA更好用，但考虑到多从机通讯，感觉还是阻塞式更灵活一些，毕竟大部分通讯片选延时1us，但一个数据传进去也就不到1us。<br>以后有时间改个DMA或者IT升级版<br>SPI从机，让你的单片机变成战斗机<br>主打一个高速数据流，双向传输，SimToReal的不二数据流选择<br>SPI从机的硬件NSS模式感觉不是很好用，也没有额外的中断功能，压根不知道什么时候被传了数据<br>所以实现这个功能的时候，我考虑使用GPIO的外部中断触发实现片选功能，并在中断触发中完成数据交换的初始化任务<br>样例是考虑一个4字节的SPI数据互换，并在外部中断函数中完成后续的数据处理任务</p>
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>SPI从机，让你的单片机变成战斗机<br>主打一个高速数据流，双向传输，SimToReal的不二数据流选择<br>SPI从机的硬件NSS模式感觉不是很好用，也没有额外的中断功能，压根不知道什么时候被传了数据<br>所以实现这个功能的时候，我考虑使用GPIO的外部中断触发实现片选功能，并在中断触发中完成数据交换的初始化任务<br>样例是考虑一个4字节的SPI数据互换，并在外部中断函数中完成后续的数据处理任务</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spix = new_SPI_Slave_Driver(SPIx);</span><br></pre></td></tr></table></figure>
 
 <p>额外的，需要在SPI与GPIO的中断中补全接口</p>
